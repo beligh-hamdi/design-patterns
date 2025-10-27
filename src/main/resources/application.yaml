@@ -1,0 +1,22 @@
+chain:
+  steps:
+    - name: authHandler
+      timeout: 2s
+      retry: 1
+      stopOnError: true
+      parallel: false
+    - name: validationHandler
+      timeout: 1s
+      retry: 2
+      stopOnError: true
+      parallel: true
+    - name: loggingHandler
+      timeout: 1s
+      retry: 0
+      stopOnError: false
+      parallel: true
+    - name: businessHandler
+      timeout: 3s
+      retry: 1
+      stopOnError: true
+      parallel: false
