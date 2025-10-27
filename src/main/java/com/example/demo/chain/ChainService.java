@@ -27,13 +27,13 @@ public class ChainService {
     public Mono<Void> execute(RequestContext<?> context) {
         log.info("🚀 Starting chain with correlation ID: {}", context.getCorrelationId());
 
-        List<HandlerDefinition> steps = properties.getSteps();
+        List<Step> steps = properties.getSteps();
         Mono<Void> chain = Mono.empty();
 
-        for (HandlerDefinition step : steps) {
+        for (Step step : steps) {
             CommandHandler commandHandler = handlerMap.get(step.getName());
             if (commandHandler == null) {
-                System.out.println("⚠️ Handler not found: " + step.getName());
+                log.warn("⚠️ Handler not found: {}", step.getName());
                 continue;
             }
 
